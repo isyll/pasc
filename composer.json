@@ -1,0 +1,16 @@
+{
+    "name": "isyll/pasc",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ibrahima Sylla",
+            "email": "syllaisa6@gmail.com"
+        }
+    ],
+    "require": {}
+}
