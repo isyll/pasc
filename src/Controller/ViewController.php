@@ -48,7 +48,7 @@ class ViewController extends Controller
                 echo $this->render('articles-insert', $errors);
             } else {
                 $this->model->insert($_POST);
-                echo $this->render('articles-insert');
+                echo $this->render('articles-insert', ['msg' => "Les données ont été enregistrées"]);
             }
         } else if ($method === 'GET') {
             echo $this->render('articles-insert');

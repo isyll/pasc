@@ -16,5 +16,10 @@
             </small>
         <?php endif ?>
         <input type="submit" value="Envoyer">
+        <?php if (isset($msg)): ?>
+            <small style="color:green;">
+                <?= $msg ?>
+            </small>
+        <?php endif ?>
     </form>
 </div>
