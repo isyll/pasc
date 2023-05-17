@@ -8,4 +8,5 @@ $router = new Routes();
 $router->register(['/article/all', ['ArticleController', 'all']]);
 $router->register(['/view/article/all', ['ViewController', 'allArticles']]);
 $router->register(['/view/article/insert', ['ViewController', 'insertArticles']]);
+$router->add404(['Page404Controller', 'index']);
 $router->execute();

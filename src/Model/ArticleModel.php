@@ -17,7 +17,7 @@ class ArticleModel
     }
   }
 
-  public function all()
+  public function all() : array
   {
     return $this->pdo->query('SELECT * FROM article')->fetchAll();
   }

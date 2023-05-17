@@ -39,6 +39,11 @@ class Routes
         return [$method, $uri];
     }
 
+    public function add404($route)
+    {
+        $this->path['page404'] = $route;
+    }
+
     public function execute()
     {
         [$method, $uri] = $this->resolve();
@@ -46,6 +51,11 @@ class Routes
         if (isset($this->path[$uri])) {
             $class  = $this->path[$uri][0];
             $action = $this->path[$uri][1];
+
+            eval("use App\\Controller\\$class; (new $class())->$action();");
+        } else if (isset($this->path['page404'])) {
+            $class  = $this->path['page404'][0];
+            $action = $this->path['page404'][1];
 
             eval("use App\\Controller\\$class; (new $class())->$action();");
         }
