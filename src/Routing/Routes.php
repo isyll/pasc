@@ -34,6 +34,13 @@ class Routes
   {
     [$method, $uri] = $this->resolve();
 
+    // $uriParams = explode('/', $uri);
+
+    // eval("
+    // \$c = new App\\Controller\\{$uriParams[0]}();
+    // \$c->{$uriParams[1]};
+    // ");
+
     switch ($uri) {
       case '/article/all':
         $arc = new ArticleController();

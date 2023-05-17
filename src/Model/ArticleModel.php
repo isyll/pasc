@@ -24,12 +24,8 @@ class ArticleModel
 
   public function insert(array $datas)
   {
-    $libelle = $datas['libelle'];
-    $prix    = $datas['prix'];
-
-    return $this->pdo->query(
-      "INSERT INTO article(libelle, prix)
-      values('$libelle', $prix)"
-    );
+    $this->pdo
+      ->prepare('INSERT INTO article(libelle, prix) VALUES(:libelle, :prix)')
+      ->execute($datas);
   }
 }

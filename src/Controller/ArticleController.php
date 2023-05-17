@@ -16,7 +16,12 @@ class ArticleController extends Controller
 
   public function all()
   {
-    return $this->jsonResponse($this->model->all());
+    return $this->jsonResponse(
+      200,
+      "HTTP/1.1 200 OK",
+      "Recupération des données",
+      $this->model->all()
+    );
   }
 
   public function insert()
@@ -24,15 +29,18 @@ class ArticleController extends Controller
     $datas = $this->jsonDecode();
 
     if (null === $datas || !isset($datas['libelle']) || !isset($datas['prix'])) {
-      header("HTTP/1.1 400 Bad Request");
-
-      $this->jsonResponse([
-        'code' => 400,
-        'message' => 'Les données sont invalides'
-      ]);
+      $this->jsonResponse(
+        400,
+        'HTTP/1.1 400 Bad Request',
+        'Les données sont invalides'
+      );
     } else {
-      $this->model->insert(
-        ['libelle' => $datas['libelle'], 'prix' => (float) $datas['prix']]
+      $this->model->insert($datas);
+      $this->jsonResponse(
+        200,
+        "HTTP/1.1 200 OK",
+        'Les données ont été enregistrées',
+        $datas
       );
     }
   }
