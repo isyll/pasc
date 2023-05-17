@@ -6,8 +6,8 @@ class ArticleModel
 {
   private $pdo;
 
-  public function __construct(
-  ) {
+  public function __construct()
+  {
     try {
       $this->pdo = new \PDO('mysql:dbname=pas;dbhost=localhost', 'isyll', 'xCplm_');
       $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);

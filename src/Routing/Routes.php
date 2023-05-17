@@ -13,6 +13,14 @@ class Routes
     $this->execute();
   }
 
+  public function includeClass(string $className)
+  {
+    $reflection = new \ReflectionClass($className);
+    $namespace  = $reflection->getNamespaceName();
+
+    eval("use $namespace\\$className;");
+  }
+
   public function register(array $route)
   {
     $this->path[$route[0]] = $route[1];
@@ -34,25 +42,9 @@ class Routes
   {
     [$method, $uri] = $this->resolve();
 
-    // $uriParams = explode('/', $uri);
+    $class  = ucfirst(explode('/', $uri)[1]) . 'Controller';
+    $action = explode('/', $uri)[2];
 
-    // eval("
-    // \$c = new App\\Controller\\{$uriParams[0]}();
-    // \$c->{$uriParams[1]};
-    // ");
-
-    switch ($uri) {
-      case '/article/all':
-        $arc = new ArticleController();
-        $arc->all();
-        break;
-      case '/article/ajouter':
-        if ($method == 'POST') {
-          $arc = new ArticleController();
-          echo $arc->insert();
-        }
-        break;
-    }
-
+    eval("use App\\Controller\\$class; (new $class())->$action();");
   }
 }
